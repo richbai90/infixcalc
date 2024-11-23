@@ -1,5 +1,5 @@
 use core::fmt;
-use std::f32::NAN;
+use std::f64::NAN;
 
 #[derive(Copy, Clone, Debug)]
 pub enum Operator {
@@ -111,13 +111,13 @@ impl Operator {
         }
     }
 
-    fn operate(&self, a: f32, b: f32) -> f32 {
+    fn operate(&self, a: f64, b: f64) -> f64 {
         match self {
             Operator::Add => a + b,
             Operator::Div => a / b,
             Operator::Mod => a % b,
             Operator::Mult => a * b,
-            Operator::Exp => a * 10.0_f32.powf(b),
+            Operator::Exp => a * 10.0_f64.powf(b),
             Operator::Pow => a.powf(b),
             Operator::Sub => a - b,
             _ => NAN,
@@ -176,12 +176,12 @@ pub fn tokenize(expr: &str) -> Vec<Token> {
     return pe;
 }
 
-pub fn evaluate(tokens: Vec<Token>) -> Result<f32, PostfixEvalError> {
-    let mut operands: Vec<f32> = vec![];
+pub fn evaluate(tokens: Vec<Token>) -> Result<f64, PostfixEvalError> {
+    let mut operands: Vec<f64> = vec![];
 
     for token in tokens {
         match token {
-            Token::Operand(op) => match op.parse::<f32>() {
+            Token::Operand(op) => match op.parse::<f64>() {
                 Ok(f) => operands.push(f),
                 Err(_) => return Err(PostfixEvalError),
             },

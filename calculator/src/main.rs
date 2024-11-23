@@ -18,7 +18,7 @@ fn main() {
     }
 }
 
-fn calculate(expression: &str) -> Result<f32, String> {
+fn calculate(expression: &str) -> Result<f64, String> {
     let tokens = tokenize(expression);
     evaluate(tokens).map_err(|e| e.to_string())
 }
